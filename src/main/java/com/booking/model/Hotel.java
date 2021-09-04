@@ -23,6 +23,9 @@ public class Hotel {
     private String description;
     @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HotelImage> hotelImages;
+    @ManyToMany
+    @JoinTable(name="hotel_category_equipment",joinColumns = @JoinColumn(name="hotel_id"), inverseJoinColumns = @JoinColumn(name="category_equipment_id"))
+    private List<CategoryEquipment> categoryEquipments;
 
 
     public Hotel() {
