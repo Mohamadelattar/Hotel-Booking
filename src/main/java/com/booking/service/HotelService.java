@@ -1,24 +1,15 @@
 package com.booking.service;
 
+import com.booking.model.Equipment;
 import com.booking.model.Hotel;
-import com.booking.repository.HotelRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Service
-@AllArgsConstructor
-public class HotelService {
+import java.util.Optional;
 
-    private final HotelRepository hotelRepository;
-
-    @Transactional
-    public List<Hotel> getAllHotels() {
-        return hotelRepository.findAll();
-    }
-    // insett ?????
-    public void addNewHotel(Hotel hotel) {
-        hotelRepository.save(hotel);
-    }
+public interface HotelService {
+    public List<Hotel> findAll();
+    public Optional<Hotel> findById(long hotelId);
+    public void save(Hotel hotel);
+    public void update(Hotel hotel);
+    public void deleteById(long hotelId);
 }

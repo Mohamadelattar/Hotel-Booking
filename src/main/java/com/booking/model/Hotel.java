@@ -21,25 +21,14 @@ public class Hotel {
     private String address;
     @Column(name="description")
     private String description;
+    @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HotelImage> hotelImages;
 
-    //@ElementCollection
-    //@CollectionTable(name="blacklist", joinColumns=@JoinColumn(name="group_account_id")
-    //@Column(name="images")
-    //private List<String> images;
 
     public Hotel() {
     }
 
     public Hotel(String name, String city, String address, String description) {
-        this.name = name;
-        this.city = city;
-        this.address = address;
-        this.description = description;
-
-    }
-
-    public Hotel(Long id, String name, String city, String address, String description) {
-        this.id = id;
         this.name = name;
         this.city = city;
         this.address = address;
