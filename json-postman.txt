@@ -1,0 +1,12 @@
+ADD PERSON: 
+
+{
+    "id":2,
+    "username": "mohamedelattar",
+    "firstName":"mohamed",
+    "lastName": "El attar",
+    "email": "mohamedelattar@gmail.com",
+    "password": "{noop}mohamed123",
+    "identityNumber": "D90876",
+    "phoneNumber": "0678765634"
+}
