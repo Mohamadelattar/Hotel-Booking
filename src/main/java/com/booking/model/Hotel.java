@@ -15,10 +15,11 @@ public class Hotel {
     private Long id;
     @Column(name="name")
     private String name;
-    @Column(name = "city")
-    private String city;
-    @Column(name = "address")
-    private String address;
+    @ManyToOne
+    @JoinColumn(name="city_id")
+    private City city;
+    @Column(name="adress")
+    private String adress;
     @Column(name="description")
     private String description;
     @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,10 +32,10 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(String name, String city, String address, String description) {
+    public Hotel(String name, City city,String adress, String description) {
         this.name = name;
         this.city = city;
-        this.address = address;
+        this.adress = adress;
         this.description = description;
     }
 }
