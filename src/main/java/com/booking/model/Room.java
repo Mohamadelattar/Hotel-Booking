@@ -18,10 +18,10 @@ public class Room {
     private int personNumber;
     @Column(name = "price")
     private double price;
-   /* @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<RoomImage> roomImageList;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Bed> bedList;*/
+    private List<Bed> bedList;
 
     public Room() {
 
