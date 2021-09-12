@@ -33,4 +33,14 @@ public class Person {
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Authority> authorities;
+
+    public Person(String firstName, String lastName, String identityNumber, String username, String email, String password, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.identityNumber = identityNumber;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 }
