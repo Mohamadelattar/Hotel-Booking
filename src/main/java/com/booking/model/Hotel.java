@@ -1,5 +1,7 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,12 +19,14 @@ public class Hotel {
     private String name;
     @ManyToOne
     @JoinColumn(name="city_id")
+    @JsonManagedReference
     private City city;
     @Column(name="adress")
     private String adress;
     @Column(name="description")
     private String description;
     @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<HotelImage> hotelImages;
     @ManyToMany
     @JoinTable(name="hotel_category_equipment",joinColumns = @JoinColumn(name="hotel_id"), inverseJoinColumns = @JoinColumn(name="category_equipment_id"))

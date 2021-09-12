@@ -1,6 +1,7 @@
 package com.booking.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class HotelImage {
     private String path;
     @ManyToOne
     @JoinColumn(name="hotel_id", nullable = false)
+    @JsonManagedReference
     private Hotel hotel;
 
     public HotelImage() {

@@ -14,7 +14,7 @@ import java.util.List;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column(name="first_name")
     private String firstName;
@@ -30,7 +30,9 @@ public class Person {
     private String password;
     @Column(name="phone_number")
     private String phoneNumber;
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="person_authority",
+                joinColumns = @JoinColumn(name="person_id"),
+                inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private List<Authority> authorities;
 }

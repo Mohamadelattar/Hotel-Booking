@@ -1,11 +1,13 @@
 package com.booking.service;
 
 import com.booking.exception.PersonAlreadyExistsException;
+import com.booking.model.Authority;
 import com.booking.model.Person;
 import com.booking.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,24 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    @Override
+    public List<Person> findPersonsByRole(String role) {
+        List<Person> persons = personRepository.findAll();
+        List<Person> personsByRole = new ArrayList<>();
+        // loop over Persons ==> Get Persons by Authority
+        for(Person person:persons){
+            List<Authority> authorities = person.getAuthorities();
+            // loop over Authorities
+            for(Authority authority:authorities){
+                if(authority.getAuthority() == role){
+                    personsByRole.add(person);
+                    break;
+                }
+            }
+        }
+        return personsByRole;
     }
 
     @Override

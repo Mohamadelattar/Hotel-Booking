@@ -1,5 +1,7 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +20,11 @@ public class City {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy="city")
+    @JsonBackReference
     private List<Hotel> hotels;
     @ManyToOne
     @JoinColumn(name="country_id")
+    @JsonManagedReference
     private Country country;
 
 

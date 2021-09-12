@@ -1,14 +1,14 @@
 package com.booking.security;
 
+import com.booking.model.Authority;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -37,7 +37,16 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+
+        // Claims is data to be store in JWT Token
         Map<String, Object> claims = new HashMap<>();
+        // Add Authorities to jwt Claims
+        Set<String> Personroles = new HashSet<>();
+        for(GrantedAuthority authority:userDetails.getAuthorities()){
+            Personroles.add(authority.getAuthority());
+        }
+        claims.put("authorities",Personroles.toArray());
+
         return createToken(claims, userDetails.getUsername());
     }
 

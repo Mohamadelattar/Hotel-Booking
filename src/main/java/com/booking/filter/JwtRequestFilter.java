@@ -2,12 +2,16 @@ package com.booking.filter;
 
 import com.booking.security.JwtUtil;
 import com.booking.security.MyUserDetailsService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.apache.catalina.security.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -15,8 +19,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@Component
+@Service
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -33,6 +38,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwt = null;
+        List<String> roles = null;
 
 //        if(authorizationHeader == null){
 //            throw new RuntimeException("Unauthorized");

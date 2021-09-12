@@ -1,5 +1,6 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,5 +17,6 @@ public class Country {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy="country")
+    @JsonBackReference
     private List<City> cities;
 }

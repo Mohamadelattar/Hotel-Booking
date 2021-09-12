@@ -1,11 +1,11 @@
 package com.booking.service;
 
-import com.booking.model.Equipment;
-import com.booking.model.Hotel;
-import com.booking.model.HotelImage;
+import com.booking.model.*;
+import com.booking.repository.HotelCriteriaRepository;
 import com.booking.repository.HotelRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +17,19 @@ public class HotelServiceImpl implements HotelService{
 
     @Autowired
     private HotelRepository hotelRepository;
+    @Autowired
+    private HotelCriteriaRepository hotelCriteriaRepository;
 
     @Override
     public List<Hotel> findAll() {
         return hotelRepository.findAll();
+    }
+
+    // find Hotels by Name Search ==> using Criteria API
+    @Override
+    public Page<Hotel> findAllWithFilters(HotelPage hotelPage,
+                                    HotelSearchCriteria hotelSearchCriteria){
+        return hotelCriteriaRepository.findAllWithFilters(hotelPage, hotelSearchCriteria);
     }
 
     @Override

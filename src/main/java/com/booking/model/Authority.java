@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +16,12 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String authority;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="person_id")
+    @ManyToMany
+    @JoinTable(name="person_authority",
+            joinColumns = @JoinColumn(name="authority_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
     @JsonBackReference
-    private Person person;
+    private List<Person> persons;
 
     public Authority() {
     }

@@ -18,6 +18,11 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
             throws IOException, ServletException {
         // 401
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed");
+
+        // other errors
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getOutputStream().println("{ \"error\": \"" + authException.getMessage() + "\" }");
     }
 
     @ExceptionHandler(value = {AccessDeniedException.class})
