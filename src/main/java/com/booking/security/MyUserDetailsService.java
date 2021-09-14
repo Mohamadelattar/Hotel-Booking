@@ -20,7 +20,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) {
-        Optional<Person> person = personRepository.findPersonByUsername(username);
+        Person tempPerson = personRepository.findPersonByUsername(username);
+
+        Optional<Person> person = Optional.ofNullable(tempPerson);
 
         if(person == null) {
             throw new UsernameNotFoundException("username not Found : "+ username);

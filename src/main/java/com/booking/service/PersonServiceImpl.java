@@ -16,6 +16,8 @@ public class PersonServiceImpl implements PersonService{
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private AuthorityService authorityService;
 
     @Override
     public List<Person> findAll() {
@@ -41,6 +43,18 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
+    public String getPersonRole(String username) {
+        Person person = personRepository.findPersonByUsername(username);
+        // Get Authorities
+        String authority = person.getAuthorities().get(0).getAuthority();
+
+        System.out.println("authority is : " + authority);
+
+        return authority;
+
+    }
+
+    @Override
     public Optional<Person> findById(long personId) {
         Optional<Person> person = personRepository.findById(personId);
         if(person.isEmpty()) return  null;
@@ -48,19 +62,29 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public void save(Person person) throws PersonAlreadyExistsException {
+    public void save(Person person, String role) throws PersonAlreadyExistsException {
         // check if the user with email or username already exists
         String email = person.getEmail();
         String username = person.getUsername();
         Optional<Person> personWithEmail = personRepository.findPersonByEmail(email);
-        Optional<Person> personWithUsername = personRepository.findPersonByUsername(username);
+        Person personWithUsername = personRepository.findPersonByUsername(username);
         if(!personWithEmail.isEmpty()){ // Person with email already exixts
             throw new PersonAlreadyExistsException("User with this email " + email + " already exists");
         }
 
-        if(!personWithUsername.isEmpty()){ // Person with username already exixts
+        if(personWithUsername == null){ // Person with username already exixts
             throw new PersonAlreadyExistsException("User with this username " + username + " already exists");
         }
+
+        // Get Authority
+        Authority authority = authorityService.findAuthorityByRole(role);
+
+        // List of Autorities
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(authority);
+
+        // Set Authorities to Person
+        person.setAuthorities(authorities);
 
         personRepository.save(person);
     }

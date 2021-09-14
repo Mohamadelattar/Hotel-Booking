@@ -1,8 +1,10 @@
 package com.booking.controller;
 
 import com.booking.model.AuthenticationResponse;
+import com.booking.model.Authority;
 import com.booking.model.Person;
 import com.booking.security.JwtUtil;
+import com.booking.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,9 @@ public class AuthenticationController {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private PersonService personService;
+
+    @Autowired
     private JwtUtil jwtTokenUtil;
 
     @PostMapping("/authenticate")
@@ -40,6 +45,14 @@ public class AuthenticationController {
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        final String username = person.getUsername();
+
+        System.out.println("usernmae is : " + username);
+
+        final String ROLE = personService.getPersonRole(username);
+
+        System.out.println("Role is : " + ROLE);
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt,ROLE));
     }
 }

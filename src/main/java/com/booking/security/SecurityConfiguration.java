@@ -38,8 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/api/clients/register").permitAll()
+                .antMatchers("/api/manage/managers/register").permitAll()
                 .antMatchers("/api/authorities/*").permitAll()
+                .antMatchers("/api/hotels").permitAll()
                 .antMatchers("/api/hotels/*").permitAll()
+                .antMatchers("/api/cities/by_country").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

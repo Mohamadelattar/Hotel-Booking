@@ -10,8 +10,9 @@ import java.util.Optional;
 public interface PersonService {
     public List<Person> findAll();
     public List<Person> findPersonsByRole(String role);
+    public String getPersonRole(String username);
     public Optional<Person> findById(long personId);
-    public void save(Person person) throws PersonAlreadyExistsException;
+    public void save(Person person, String role) throws PersonAlreadyExistsException;
     public void update(Person person);
     public void deleteById(long personId);
 }

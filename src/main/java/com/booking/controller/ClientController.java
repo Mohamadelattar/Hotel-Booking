@@ -15,6 +15,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class ClientController {
 
+    private String ROLE_CLIENT = "ROLE_CLIENT";
     @Autowired
     private PersonService personService;
 
@@ -31,7 +32,7 @@ public class ClientController {
     // Add new Person ==> Sign Up
     @PostMapping("/clients/register")
     public void saveClient(@RequestBody Person person) throws PersonAlreadyExistsException {
-        personService.save(person);
+        personService.save(person,ROLE_CLIENT);
     }
 
     @DeleteMapping("/clients/{clientId}")
