@@ -11,4 +11,5 @@ public interface RoomService {
     public void save(Room room);
     public void update(Room room);
     public void deleteById(long roomId);
+    public List<Object> findRoomsByHotel(long hotelId);
 }

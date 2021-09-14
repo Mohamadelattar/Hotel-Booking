@@ -17,7 +17,7 @@ public class HotelImage {
     @Column(name="path")
     private String path;
     @ManyToOne
-    @JoinColumn(name="hotel_id", nullable = false)
+    @JoinColumn(name="hotel_id")
     @JsonManagedReference
     private Hotel hotel;
 

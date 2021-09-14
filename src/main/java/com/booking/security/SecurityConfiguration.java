@@ -40,6 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/clients/register").permitAll()
                 .antMatchers("/api/authorities/*").permitAll()
                 .antMatchers("/api/hotels/*").permitAll()
+                .antMatchers("/api/images/*").permitAll()
+                .antMatchers("/api/hotels/images/*").permitAll()
+                .antMatchers("/api/hotels/rooms/*").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
