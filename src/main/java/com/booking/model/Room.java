@@ -1,5 +1,6 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,18 +19,24 @@ public class Room {
     private int personNumber;
     @Column(name = "price")
     private double price;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    @JsonManagedReference
+    private Hotel hotel;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<RoomImage> roomImageList;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Bed> bedList;
 
+
     public Room() {
 
     }
 
-    public Room(String type, int personNumber, double price) {
+    public Room(String type, int personNumber, double price, Hotel hotel) {
         this.type = type;
         this.personNumber = personNumber;
         this.price = price;
+        this.hotel = hotel;
     }
 }

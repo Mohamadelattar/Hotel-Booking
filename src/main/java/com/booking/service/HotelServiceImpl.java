@@ -3,12 +3,9 @@ package com.booking.service;
 import com.booking.model.*;
 import com.booking.repository.HotelCriteriaRepository;
 import com.booking.repository.HotelRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 

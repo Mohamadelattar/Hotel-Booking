@@ -25,13 +25,15 @@ public class Hotel {
     private String adress;
     @Column(name="description")
     private String description;
-    @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="hotel")
     @JsonBackReference
     private List<HotelImage> hotelImages;
     @ManyToMany
     @JoinTable(name="hotel_category_equipment",joinColumns = @JoinColumn(name="hotel_id"), inverseJoinColumns = @JoinColumn(name="category_equipment_id"))
     private List<CategoryEquipment> categoryEquipments;
-
+    @OneToMany(mappedBy = "hotel")
+    @JsonBackReference
+    private List<Room> roomsHotel;
 
     public Hotel() {
     }

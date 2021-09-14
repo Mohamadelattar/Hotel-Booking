@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class RoomController {
     @Autowired
     private RoomService roomService;
@@ -30,5 +31,11 @@ public class RoomController {
     @DeleteMapping("/rooms/{roomId}")
     public void deleteRoom(@PathVariable long roomId){
         roomService.deleteById(roomId);
+    }
+
+    @GetMapping("/hotels/rooms/{hotelId}")
+    public List<Object> getRoomsByHotel(@PathVariable long hotelId)
+    {
+        return roomService.findRoomsByHotel(hotelId);
     }
 }

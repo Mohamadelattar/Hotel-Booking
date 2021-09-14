@@ -36,4 +36,6 @@ public class RoomImageServiceImpl implements RoomImageService{
     public void deleteById(long roomImageId) {
         roomImageRepository.deleteById(roomImageId);
     }
+
+
 }
