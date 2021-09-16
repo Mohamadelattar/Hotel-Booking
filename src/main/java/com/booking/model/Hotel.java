@@ -1,16 +1,19 @@
 package com.booking.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name="hotel")
-public class Hotel {
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+public class Hotel implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,20 +22,17 @@ public class Hotel {
     private String name;
     @ManyToOne
     @JoinColumn(name="city_id")
-    @JsonManagedReference
     private City city;
     @Column(name="adress")
     private String adress;
     @Column(name="description")
     private String description;
-    @OneToMany(mappedBy="hotel")
-    @JsonBackReference
+    @OneToMany(mappedBy="hotel", cascade = CascadeType.ALL)
     private List<HotelImage> hotelImages;
     @ManyToMany
     @JoinTable(name="hotel_category_equipment",joinColumns = @JoinColumn(name="hotel_id"), inverseJoinColumns = @JoinColumn(name="category_equipment_id"))
     private List<CategoryEquipment> categoryEquipments;
     @OneToMany(mappedBy = "hotel")
-    @JsonBackReference
     private List<Room> roomsHotel;
 
     public Hotel() {
