@@ -2,7 +2,8 @@ package com.booking.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="hotel_image")
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class HotelImage {
 
     @Id
@@ -19,7 +21,6 @@ public class HotelImage {
     private String path;
     @ManyToOne
     @JoinColumn(name="hotel_id")
-    @JsonBackReference
     private Hotel hotel;
 
     public HotelImage() {

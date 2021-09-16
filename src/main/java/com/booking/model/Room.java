@@ -22,13 +22,10 @@ public class Room {
     private double price;
     @ManyToOne
     @JoinColumn(name = "hotel_id")
-    @JsonBackReference
     private Hotel hotel;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonManagedReference
     private List<RoomImage> roomImageList;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonManagedReference
     private List<Bed> bedList;
 
 
