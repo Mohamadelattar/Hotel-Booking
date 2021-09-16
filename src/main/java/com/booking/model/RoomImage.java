@@ -1,5 +1,6 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class RoomImage {
     private String path;
     @ManyToOne
     @JoinColumn(name="room_id", nullable = false)
+    @JsonBackReference
     private Room room;
 
     public RoomImage() {

@@ -1,5 +1,7 @@
 package com.booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ public class Equipment {
     private String name;
     @ManyToOne
     @JoinColumn(name="category_equipment_id")
+    @JsonBackReference
     private CategoryEquipment categoryEquipment;
 
 }

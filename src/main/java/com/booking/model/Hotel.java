@@ -26,13 +26,14 @@ public class Hotel {
     @Column(name="description")
     private String description;
     @OneToMany(mappedBy="hotel")
-    @JsonBackReference
+    @JsonManagedReference
     private List<HotelImage> hotelImages;
     @ManyToMany
     @JoinTable(name="hotel_category_equipment",joinColumns = @JoinColumn(name="hotel_id"), inverseJoinColumns = @JoinColumn(name="category_equipment_id"))
+    @JsonManagedReference
     private List<CategoryEquipment> categoryEquipments;
     @OneToMany(mappedBy = "hotel")
-    @JsonBackReference
+    @JsonManagedReference
     private List<Room> roomsHotel;
 
     public Hotel() {
