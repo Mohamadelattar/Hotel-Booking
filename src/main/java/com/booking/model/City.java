@@ -1,18 +1,22 @@
 package com.booking.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name="location")
-public class City {
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+public class City implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +24,9 @@ public class City {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy="city")
-    @JsonBackReference
     private List<Hotel> hotels;
     @ManyToOne
     @JoinColumn(name="country_id")
-    @JsonManagedReference
     private Country country;
 
 
